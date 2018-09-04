@@ -1,0 +1,17 @@
+# General
+
+.DS_Store
+*~
+
+# Eclipse
+
+*.metadata
+*.plugins
+*.recommenders
+*.project
+*.classpath
+*.settings
+*.class
+# Additional formats
+
+*.pdf
