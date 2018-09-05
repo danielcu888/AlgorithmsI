@@ -1,3 +1,4 @@
+
 import java.util.HashSet;
 
 public class QuickFindUF implements UF {

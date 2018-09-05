@@ -1,4 +1,5 @@
 
+
 public class WeightQuickUnionWithPathCompressionUF extends QuickUnionUF {
 
 	public WeightQuickUnionWithPathCompressionUF(int N) {

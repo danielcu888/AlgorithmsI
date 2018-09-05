@@ -1,4 +1,5 @@
 
+
 public class WeightedQuickUnionUF extends QuickUnionUF {
 
 	private int[] depth;
