@@ -13,6 +13,18 @@
 *.classpath
 *.settings
 *.class
+*.cproject
+
+*.d
+*.o
+*.mk
+*main
+*makefile
+*.plist
+
+**/**/**/**/*/Debug
+**/**/**/**/*/Release
+
 # Additional formats
 
 *.pdf
