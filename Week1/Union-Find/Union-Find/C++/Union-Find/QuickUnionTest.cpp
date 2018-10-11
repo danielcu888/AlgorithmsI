@@ -6,26 +6,30 @@
 
 namespace uf
 {
-  TEST(QuickUnionTests, Constructor1Parameter)
+  namespace quickuniontesting
   {
-    uf::QuickUnion qu(10);
-  }
 
-  TEST(QuickUnionTests, Find)
-  {
-    uf::QuickUnion qu(10);
-    for (std::size_t i = 0; i < 10; ++i)
+    TEST(QuickUnionTests, Constructor1Parameter)
     {
-      ASSERT_EQ(qu.find(i), i);
+      QuickUnion qu(10);
     }
-  }
 
-  TEST(QuickUnionTests, Unify)
-  {
-    uf::QuickUnion qu(10);
-    qu.unify(5,6);
-    ASSERT_EQ(qu.find(5), 6);
-    ASSERT_EQ(qu.find(6), 6);
-  }
+    TEST(QuickUnionTests, Find)
+    {
+      QuickUnion qu(10);
+      for (std::size_t i = 0; i < 10; ++i)
+      {
+        ASSERT_EQ(qu.find(i), i);
+      }
+    }
 
-} /* namespace uf */
+    TEST(QuickUnionTests, Unify)
+    {
+      QuickUnion qu(10);
+      qu.unify(5,6);
+      ASSERT_EQ(qu.find(5), 6);
+      ASSERT_EQ(qu.find(6), 6);
+    }
+
+  } // ! namespace quickuniontesting
+} // ! namespace uf
