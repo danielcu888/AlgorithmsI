@@ -8,28 +8,31 @@
 #include <iostream>
 #include <cstdlib>
 
-namespace qftesting
+namespace uf
 {
-  TEST(QuickFindTests, Constructor1Parameter)
+  namespace qftesting
   {
-    uf::QuickFind qf(10);
-  }
-
-  TEST(QuickFindTests, Find)
-  {
-    uf::QuickFind qf(10);
-    for (std::size_t i = 0; i < 10; ++i)
+    TEST(QuickFindTests, Constructor1Parameter)
     {
-      ASSERT_EQ(qf.find(i), i);
+      uf::QuickFind qf(10);
     }
-  }
 
-  TEST(QuickFindTests, Unify)
-  {
-    uf::QuickFind qf(10);
-    qf.unify(5,6);
-    ASSERT_EQ(qf.find(5), 6);
-    ASSERT_EQ(qf.find(6), 6);
-  }
+    TEST(QuickFindTests, Find)
+    {
+      uf::QuickFind qf(10);
+      for (std::size_t i = 0; i < 10; ++i)
+      {
+        ASSERT_EQ(qf.find(i), i);
+      }
+    }
 
-} // ! namespace qftesting
+    TEST(QuickFindTests, Unify)
+    {
+      uf::QuickFind qf(10);
+      qf.unify(5,6);
+      ASSERT_EQ(qf.find(5), 6);
+      ASSERT_EQ(qf.find(6), 6);
+    }
+
+  } // ! namespace qftesting
+} // ! namespace uf
