@@ -59,7 +59,7 @@ namespace uf
     std::string s;
     for (std::size_t i = 0; i < this->m_a.size(); ++i)
     {
-      s += boost::lexical_cast<std::string>(this->find(i)) + " ";
+      s += boost::lexical_cast<std::string>(this->m_a[i]) + " ";
     }
     return s;
   }
