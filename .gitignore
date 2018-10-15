@@ -28,3 +28,7 @@
 # Additional formats
 
 *.pdf
+
+build/
+*.dylib
+*.a
