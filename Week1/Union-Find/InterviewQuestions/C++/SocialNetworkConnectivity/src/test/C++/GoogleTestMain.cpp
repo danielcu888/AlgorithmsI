@@ -1,6 +1,3 @@
-// iostream
-#include <iostream>
-
 // Testing
 #include "globals.h"
 #include "gtest/gtest.h"
