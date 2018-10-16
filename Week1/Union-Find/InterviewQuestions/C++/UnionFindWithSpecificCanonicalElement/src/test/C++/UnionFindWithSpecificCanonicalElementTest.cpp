@@ -48,5 +48,17 @@ namespace uf
       ASSERT_EQ(uf.find(0), 4);
     }
 
+    TEST(UnionfindWithSpecificCanonicalElementTests, BugFix)
+    {
+      UnionFindWithSpecificCanonicalElement uf(5);
+      uf.join(2, 3);
+      uf.join(4, 3);
+      ASSERT_EQ(uf.find(0), 0);
+      ASSERT_EQ(uf.find(1), 1);
+      ASSERT_EQ(uf.find(2), 4);
+      ASSERT_EQ(uf.find(3), 4);
+      ASSERT_EQ(uf.find(4), 4);
+    }
+
   } // ! namespace unionfindwithspecificcanonicalelementtesting
 } // ! namespace uf

@@ -59,7 +59,7 @@ namespace uf
   {
     this->check(i);
 
-    return this->m_max_id[i];
+    return this->m_max_id[this->root(i)];
   }
 
   std::string UnionFindWithSpecificCanonicalElement::to_string() const
