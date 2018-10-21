@@ -4,9 +4,6 @@
 // Testing
 #include <gtest/gtest.h>
 
-// Boost
-#include <boost/lexical_cast.hpp>
-
 // C++
 #include <string>
 
