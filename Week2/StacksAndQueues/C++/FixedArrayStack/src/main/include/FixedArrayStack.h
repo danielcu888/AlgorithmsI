@@ -104,7 +104,7 @@ namespace stack
       throw std::logic_error("top: Empty FixedArrayStack.");
     }
 
-    return this->m_a[this->m_sz];
+    return this->m_a[this->m_sz-1];
   }
 
   template<typename T>
