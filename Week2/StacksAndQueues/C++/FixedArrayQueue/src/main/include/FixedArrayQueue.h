@@ -18,6 +18,8 @@ namespace queues
     explicit FixedArrayQueue(std::size_t N);
     FixedArrayQueue(const FixedArrayQueue& other);
     FixedArrayQueue& operator=(const FixedArrayQueue& other);
+    FixedArrayQueue(FixedArrayQueue&&) = default;
+    FixedArrayQueue& operator=(FixedArrayQueue&&) = default;    
     ~FixedArrayQueue();
 
     bool empty() const;
