@@ -1,5 +1,5 @@
 // queues
-#include "ResizingArrayQueue.h"
+#include "LinkedListQueue.h"
 
 // Testing
 #include <gtest/gtest.h>
@@ -8,38 +8,38 @@ namespace queues
 {
   namespace queuetesting
   {
-    TEST(ResizingArrayQueue, ConstructorOneParameter)
+    TEST(LinkedListQueue, ConstructorOneParameter)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
     }
 
-    TEST(ResizingArrayQueue, Empty)
+    TEST(LinkedListQueue, Empty)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       ASSERT_TRUE(q.empty());
     }
 
-    TEST(ResizingArrayQueue, Size)
+    TEST(LinkedListQueue, Size)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       ASSERT_EQ(q.size(), 0);
     }
 
-    TEST(ResizingArrayQueue, FrontThrowsIfEmpty)
+    TEST(LinkedListQueue, FrontThrowsIfEmpty)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       ASSERT_THROW(q.front(), std::logic_error);
     }
 
-    TEST(ResizingArrayQueue, BackThrowsIfEmpty)
+    TEST(LinkedListQueue, BackThrowsIfEmpty)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       ASSERT_THROW(q.back(), std::logic_error);
     }
 
-    TEST(ResizingArrayQueue, EnqueueSingleItem)
+    TEST(LinkedListQueue, EnqueueSingleItem)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       q.enqueue(2);
       ASSERT_FALSE(q.empty());
       ASSERT_EQ(q.size(), 1);
@@ -47,22 +47,22 @@ namespace queues
       ASSERT_EQ(q.back(), 2);
     }
 
-    TEST(ResizingArrayQueue, DequeueSingleItem)
+    TEST(LinkedListQueue, DequeueSingleItem)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       q.enqueue(2);
       q.dequeue();
     }
 
-    TEST(ResizingArrayQueue, DequeueThrowsIfEmpty)
+    TEST(LinkedListQueue, DequeueThrowsIfEmpty)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       ASSERT_THROW(q.dequeue(), std::logic_error);
     }
 
-    TEST(ResizingArrayQueue, EnqueueMultipleElements)
+    TEST(LinkedListQueue, EnqueueMultipleElements)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
       for (int i = 0; i < 10; ++i)
       {
 	q.enqueue(i);
@@ -75,9 +75,9 @@ namespace queues
       ASSERT_EQ(q.size(), 10);
     }
 
-    TEST(ResizingArrayQueue, DequeueMultipleElements)
+    TEST(LinkedListQueue, DequeueMultipleElements)
     {
-      ResizingArrayQueue<int> q;
+      LinkedListQueue<int> q;
 
       for (int i = 0; i < 10; ++i)
       {
@@ -95,16 +95,16 @@ namespace queues
       ASSERT_EQ(q.size(), 0);
     }
 
-    TEST(ResizingArrayQueue, CopyConstrutor)
+    TEST(LinkedListQueue, CopyConstrutor)
     {
-      ResizingArrayQueue<int> q1;
+      LinkedListQueue<int> q1;
 
       for (int i = 0; i < 10; ++i)
       {
 	q1.enqueue(i);
       }
 
-      ResizingArrayQueue<int> q2(q1);
+      LinkedListQueue<int> q2(q1);
 
       while (!q1.empty())
       {
@@ -130,16 +130,16 @@ namespace queues
       ASSERT_EQ(q2.size(), 0);
     }
 
-    TEST(ResizingArrayQueue, CopyAssignment)
+    TEST(LinkedListQueue, CopyAssignment)
     {
-      ResizingArrayQueue<int> q1;
+      LinkedListQueue<int> q1;
 
       for (int i = 0; i < 10; ++i)
       {
 	q1.enqueue(i);
       }
 
-      ResizingArrayQueue<int> q2 = q1;
+      LinkedListQueue<int> q2 = q1;
 
       while (!q1.empty())
       {

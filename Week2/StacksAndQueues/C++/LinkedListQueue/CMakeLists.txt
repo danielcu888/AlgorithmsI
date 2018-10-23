@@ -61,10 +61,10 @@ file( GLOB
       "${PROJECT_SOURCE_DIR}/src/main/C++/*.cpp"
 )
 
-add_library( LinkedListQueue
-	     SHARED
-	     "${PROD_IMPL_FILES}"
-)
+#add_library( LinkedListQueue
+#	     SHARED
+#	     "${PROD_IMPL_FILES}"
+#)
 
 #target_link_libraries ( LinkedListQueue
 #                        LINK_PUBLIC boost_system
@@ -88,10 +88,10 @@ install(DIRECTORY "${HDR_DIR}"
         FILES_MATCHING PATTERN "*.h"
 )
 
-install( TARGETS LinkedListQueue
-	 LIBRARY
-	 DESTINATION "${LIB_INSTALL_DIR}"
-)
+#install( TARGETS LinkedListQueue
+#	 LIBRARY
+#	 DESTINATION "${LIB_INSTALL_DIR}"
+#)
 
 # ------------------------------------------------------------------------------
 # DEFINE TEST EXECUTABLE
@@ -122,7 +122,7 @@ target_include_directories( LinkedListQueueTests
 )
 
 target_link_libraries( LinkedListQueueTests
-                       LINK_PUBLIC LinkedListQueue
+#                       LINK_PUBLIC LinkedListQueue
                        LINK_PUBLIC gtest
 )
 
@@ -132,7 +132,7 @@ target_link_libraries( LinkedListQueueTests
 
 set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
 
-if (FALSE)
+if (TRUE)
   add_custom_command(
       TARGET LinkedListQueueTests
       COMMENT "Running Unit Tests..."

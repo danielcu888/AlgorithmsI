@@ -56,26 +56,33 @@ namespace queues
     , m_sz(0)
   {}
 
-  template<typeame T>
+  template<typename T>
   LinkedListQueue<T>::LinkedListQueue(const LinkedListQueue& other)
     : m_head(nullptr)
     , m_tail(nullptr)
-    , m_sz(other.sz)
+    , m_sz(other.m_sz)
   {
     Node *tmp = other.m_head;
     while (tmp != nullptr)
     {
-      this->m_head = new Node(tmp.val, this->m_head)
-      if (this->m_tail == nullptr)
+      Node *n = new Node(tmp->val);
+
+      if (this->m_head == nullptr)
       {
-	this->m_tail = this->m_head;
+	this->m_head = this->m_tail = n;
       }
+      else
+      {
+	this->m_tail->next = n;
+	this->m_tail = this->m_tail->next;
+      }
+
       tmp = tmp->next;
     }
   }
 
   template<typename T>
-  LinkedListQueue<T>& LinkedListqueue<T>::operator=(const LinkedListQueue& other)
+  LinkedListQueue<T>& LinkedListQueue<T>::operator=(const LinkedListQueue& other)
   {
     if (&other != this)
     {
@@ -134,7 +141,17 @@ namespace queues
   template<typename T>
   void LinkedListQueue<T>::enqueue(const T& val)
   {
-    this->m_head = new Node(val, this->m_head);
+    Node *n = new Node(val);
+    if (this->m_head == nullptr)
+    {
+      this->m_head = this->m_tail = n;
+    }
+    else
+    {
+      this->m_tail->next = n;
+      this->m_tail = this->m_tail->next;
+    }
+
     ++this->m_sz;
   }
 
@@ -149,6 +166,7 @@ namespace queues
     Node *tmp = this->m_head;
     this->m_head = this->m_head->next;
     delete tmp;
+
     if (this->empty())
     {
       this->m_tail = this->m_head = nullptr;
