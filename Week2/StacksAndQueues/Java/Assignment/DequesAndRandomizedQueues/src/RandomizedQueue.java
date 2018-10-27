@@ -8,7 +8,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	private int tail;
 	
 	public RandomizedQueue() {
-		this.a = null;
+		this.a = (Item[]) new Object[1];
 		this.tail = 0;
 	}
 	
@@ -44,12 +44,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		}
 		
 		final int idx = StdRandom.uniform(this.tail);
-		final Item val = this.a[idx];
+		final Item val = this.a[idx];	
+		this.a[idx] = this.a[this.tail-1];
 		--this.tail;
-		if (this.tail > 0)
-		{
-			this.a[idx] = this.a[this.tail-1];
-		}
 		
 		return val;
 	}
@@ -60,7 +57,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			throw new NoSuchElementException("sample: Empty RandomizedQueue.");
 		}
 		
-		return this.a[edu.princeton.cs.algs4.StdRandom.uniform(this.tail)];
+		return this.a[StdRandom.uniform(this.tail)];
 	}
 	
 	private class RandomIterator<Item> implements Iterator<Item>
@@ -83,16 +80,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 		@Override
 		public Item next() {
+			
 			if (!this.hasNext()) {
 				throw new NoSuchElementException("next: No more Items.");
 			}
 			
 			final int idx = StdRandom.uniform(this.iter_tail);
 			final Item val = this.iter_a[idx];
-			if (this.iter_tail > 0)
-			{
-				this.iter_a[idx] = this.iter_a[this.iter_tail-1];
-			}
+			this.iter_a[idx] = this.iter_a[this.iter_tail-1];
 			--this.iter_tail;
 			
 			return val;
