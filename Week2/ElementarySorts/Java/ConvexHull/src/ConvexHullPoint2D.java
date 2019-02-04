@@ -26,4 +26,5 @@ public class ConvexHullPoint2D extends Point2D implements Comparable<ConvexHullP
 		
 		return 0;
 	}
+	
 } // ! class ConvexHullPoint2D

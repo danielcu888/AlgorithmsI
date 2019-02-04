@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.Test;
 
 class ConvexHullTest {
-	/*
+	
 	@Test
 	void ConvexHullOfSquareWithManyIgnoredPoints() {
 		final Point2D[] points = { new Point2D(0.0, 0.0)
@@ -15,11 +15,11 @@ class ConvexHullTest {
 				                 , new Point2D(0.12, 0.45)
 				                 , new Point2D(0.45, 0.56)
 				                 , new Point2D(0.67, 0.12)
-				                 //, new Point2D(0.88, 0.49)
-				                 //, new Point2D(0.90, 0.19)
-				                 //, new Point2D(0.44, 0.44)
-				                 //, new Point2D(0.35, 0.5)
-				                 //, new Point2D(0.78, 0.22)				                 
+				                 , new Point2D(0.88, 0.49)
+				                 , new Point2D(0.90, 0.19)
+				                 , new Point2D(0.44, 0.44)
+				                 , new Point2D(0.35, 0.5)
+				                 , new Point2D(0.78, 0.22)				                 
 				                 };
 		
 		final ConvexHull ch = new ConvexHull(points);
@@ -33,10 +33,9 @@ class ConvexHullTest {
 			assertEquals(actual.get(i).y, expected[i].y);
 		}
 	}	
-	*/
 	
 	@Test
-	void ConvexHullOfSquareWithManyIgnoredPointsFails() {
+	void ConvexHullOfSquareWithManyIgnoredPoints2() {
 		final Point2D[] points = { new Point2D(0.0, 0.0)
 				                 , new Point2D(1.0, 0.0)
 				                 , new Point2D(1.0, 1.0)
@@ -96,7 +95,4 @@ class ConvexHullTest {
 			assertEquals(actual.get(i).y, expected[i].y);
 		}
 	}
-
-	
-
 }
