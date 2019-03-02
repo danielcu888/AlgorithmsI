@@ -9,7 +9,9 @@ public class Percolation {
 	 */
 	public Percolation(int n) {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.Percolation(int) is unimplemented.");
+		throw new UnsupportedOperationException(
+				"Percolation.Percolation(int) is unimplemented."
+		);
 	}
 	   
 	/**
@@ -19,7 +21,9 @@ public class Percolation {
 	 */
 	public void open(int row, int col) {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.open(int,int) is unimplemented.");
+		throw new UnsupportedOperationException(
+				"Percolation.open(int,int) is unimplemented."
+		);
 	}
 	
 	/**
@@ -30,7 +34,9 @@ public class Percolation {
 	 */
 	public boolean isOpen(int row, int col) {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.isOpen(int,int) is unimplemented.");
+		throw new UnsupportedOperationException(
+				"Percolation.isOpen(int,int) is unimplemented."
+		);
 	}
 
 	/**
@@ -41,7 +47,9 @@ public class Percolation {
 	 */
 	public boolean isFull(int row, int col) {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.isFull(int,int) is unimplemented.");		
+		throw new UnsupportedOperationException(
+				"Percolation.isFull(int,int) is unimplemented."
+		);		
 	}
 	
 	/**
@@ -50,7 +58,9 @@ public class Percolation {
 	 */
 	public int numberOfOpenSites() {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.numberOfOpenSites() is unimplemented.");				
+		throw new UnsupportedOperationException(
+				"Percolation.numberOfOpenSites() is unimplemented."
+		);				
 	}
 	
 	/**
@@ -59,6 +69,8 @@ public class Percolation {
 	 */
 	public boolean percolates() {
 		// TODO - implement
-		throw new UnsupportedOperationException("Percolation.percolates() is unimplemented.");						
+		throw new UnsupportedOperationException(
+				"Percolation.percolates() is unimplemented."
+		);						
 	}
 }
