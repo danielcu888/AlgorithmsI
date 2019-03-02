@@ -13,6 +13,10 @@ public class Percolation {
 	private int N;
 	private Site[][] grid;
 	private int numOpenSites;
+	private Site topVirtualSite;
+	private WeightedQuickUnionUF uf1;
+	private Site bottomVirtualSite;
+	private WeightedQuickUnionUF uf2;
 	
 	/**
 	 * Create an n-by-n grid, with all sites blocked.
@@ -40,6 +44,29 @@ public class Percolation {
 		}
 		
 		this.numOpenSites = 0;
+		
+		// uf1 initially connects the top virtual Site with the Site's
+		// of first row. It is always disconnected from the bottom
+		// virtual Site. It is required to determine which open Site's
+		// are full.
+		this.topVirtualSite = new Site(0, 0);
+		this.uf1 = new WeightedQuickUnionUF(n*n + 1);
+		for (int colIdx = 0; colIdx < n; ++colIdx) {
+			this.uf1.union(0, this.grid[0][colIdx].index());
+		}
+		
+		// uf2 initially connects the top virtual Site to the
+		// first row of Site's, and initially connects
+		// the bottom virtual Site to the bottom row of Site's.
+		// It is required to determine if the system is percolating.
+		this.bottomVirtualSite = new Site(n, n);
+		this.uf2 = new WeightedQuickUnionUF(n*n + 2);
+		for (int colIdx = 0; colIdx < n; ++colIdx) {
+			this.uf2.union(0, this.grid[0][colIdx].index());
+		}
+		for (int colIdx = 0; colIdx < n; ++colIdx) {
+			this.uf2.union(n*n + 1, this.grid[n-1][colIdx].index());
+		}
 	}
 
 	private enum SiteStatus {
@@ -63,6 +90,10 @@ public class Percolation {
 
 		boolean isFull() {
 			return this.status == SiteStatus.FULL;
+		}
+		
+		int index() {
+			return (this.rowIdx * N) + this.colIdx;
 		}
 		
 		Site(int rowIdx_, int colIdx_) {
