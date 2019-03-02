@@ -15,7 +15,7 @@ class PercolationTest {
 		final Percolation p = new Percolation(n);
 		for (int row = 1; row <= n; ++row) {
 			for (int col = 1; col <= n; ++col) {
-				assertTrue(p.isFull(row, col));
+				assertFalse(p.isFull(row, col));
 			}
 		}
 	}
@@ -131,6 +131,179 @@ class PercolationTest {
 		p.open(5, 1);
 		assertTrue(p.percolates());		
 	}
+
+	@Test
+	void TestIsFull2() {
+		final Percolation p = new Percolation(2);
+		
+		assertFalse(p.isFull(1, 1));
+		assertFalse(p.isFull(1, 2));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+
+		p.open(1, 1);
+
+		assertTrue(p.isFull(1, 1));
+		assertFalse(p.isFull(1, 2));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+
+		p.open(1, 2);
+
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		
+		p.open(2, 1);
+
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+
+		p.open(2, 2);
+
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(2, 1));
+		assertTrue(p.isFull(2, 2));		
+	}	
+
+	@Test
+	void TestIsFull3() {
+		final Percolation p = new Percolation(3);
+		
+		assertFalse(p.isFull(1, 1));
+		assertFalse(p.isFull(1, 2));
+		assertFalse(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertFalse(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertFalse(p.isFull(3, 3));
+
+		p.open(1, 1);
+
+		assertTrue(p.isFull(1, 1));
+		assertFalse(p.isFull(1, 2));
+		assertFalse(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertFalse(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertFalse(p.isFull(3, 3));
+
+		p.open(3, 3);
+
+		assertTrue(p.isFull(1, 1));
+		assertFalse(p.isFull(1, 2));
+		assertFalse(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertFalse(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertFalse(p.isFull(3, 3));
+
+		p.open(1, 2);
+
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertFalse(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertFalse(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertFalse(p.isFull(3, 3));
+
+		p.open(1, 3);
+
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertFalse(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertFalse(p.isFull(3, 3));
+		
+		p.open(2, 3);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));
+		
+		p.open(3, 1);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertFalse(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));
+
+		p.open(2, 1);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertTrue(p.isFull(2, 1));
+		assertFalse(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));
+
+		p.open(2, 2);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertTrue(p.isFull(2, 1));
+		assertTrue(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertFalse(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));
+		
+		p.open(3, 1);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertTrue(p.isFull(2, 1));
+		assertTrue(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertTrue(p.isFull(3, 1));
+		assertFalse(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));
+
+		p.open(3, 2);
+		
+		assertTrue(p.isFull(1, 1));
+		assertTrue(p.isFull(1, 2));
+		assertTrue(p.isFull(1, 3));
+		assertTrue(p.isFull(2, 1));
+		assertTrue(p.isFull(2, 2));
+		assertTrue(p.isFull(2, 3));
+		assertTrue(p.isFull(3, 1));
+		assertTrue(p.isFull(3, 2));
+		assertTrue(p.isFull(3, 3));		
+	}	
 	
 	@Test
 	void TestPercolates6() {
