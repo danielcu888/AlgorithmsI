@@ -32,3 +32,5 @@ external-resources
 build/
 *.dylib
 *.a
+
+*.mp4
