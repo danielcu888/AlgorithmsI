@@ -13,8 +13,8 @@ public class Percolation {
 	   
 	/**
 	 * Open site (row, col) if it is not open already.
-	 * @param row The row index of the site to be opened (>= 0).
-	 * @param col The column index of the site to be opened (>= 0).
+	 * @param row The row index of the site to be opened (>= 1).
+	 * @param col The column index of the site to be opened (>= 1).
 	 */
 	public void open(int row, int col) {
 		// TODO - implement
@@ -23,8 +23,8 @@ public class Percolation {
 	
 	/**
 	 * Return if the specified site is open.
-	 * @param row The row index of the specified site (>= 0).
-	 * @param col The column index of the specified site (>= 0).
+	 * @param row The row index of the specified site (>= 1).
+	 * @param col The column index of the specified site (>= 1).
 	 * @return If the specified site is open.
 	 */
 	public boolean isOpen(int row, int col) {
@@ -34,8 +34,8 @@ public class Percolation {
 
 	/**
 	 * Return if the specified site is full.
-	 * @param row The row index of the specified site (>= 0).
-	 * @param col The column index of the specified site (>= 0).
+	 * @param row The row index of the specified site (>= 1).
+	 * @param col The column index of the specified site (>= 1).
 	 * @return If the specified site is full.
 	 */
 	public boolean isFull(int row, int col) {
