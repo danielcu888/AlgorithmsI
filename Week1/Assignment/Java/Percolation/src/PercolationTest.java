@@ -6,7 +6,7 @@ class PercolationTest {
 	@Test
 	void TestConstructor() {
 		final int n = 5;
-		final Percolation p = new Percolation(n);
+		new Percolation(n);
 	}
 	
 	@Test
