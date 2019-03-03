@@ -10,13 +10,13 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  */
 public class Percolation {
 	
-	private int N;
-	private Site[][] grid;
+	private final int N;
+	private final Site[][] grid;
 	private int numOpenSites;
-	private Site topVirtualSite;
-	private WeightedQuickUnionUF uf1;
-	private Site bottomVirtualSite;
-	private WeightedQuickUnionUF uf2;
+	private final Site topVirtualSite;
+	private final WeightedQuickUnionUF uf1;
+	private final Site bottomVirtualSite;
+	private final WeightedQuickUnionUF uf2;
 	
 	/**
 	 * Create an n-by-n grid, with all sites blocked.
@@ -96,6 +96,29 @@ public class Percolation {
 			return (this.rowIdx * N) + this.colIdx;
 		}
 		
+		Site[] adjacentSites() {
+			
+			final Site[] adj = new Site[4];
+			
+			if (internalIndicesValid(this.rowIdx-1, this.colIdx-1)) {
+				adj[0] = grid[this.rowIdx-1][this.colIdx-1];
+			}
+			
+			if (internalIndicesValid(this.rowIdx, this.colIdx-1)) {
+				adj[1] = grid[this.rowIdx][this.colIdx-1];
+			}
+			
+			if (internalIndicesValid(this.rowIdx+1, this.colIdx)) {
+				adj[0] = grid[this.rowIdx+1][this.colIdx];
+			}
+
+			if (internalIndicesValid(this.rowIdx+1, this.colIdx+1)) {
+				adj[0] = grid[this.rowIdx+1][this.colIdx+1];
+			}
+
+			return adj;
+		}
+		
 		Site(int rowIdx_, int colIdx_) {
 			this.rowIdx = rowIdx_;
 			this.colIdx = colIdx_;
@@ -111,18 +134,36 @@ public class Percolation {
 		return internalIdx+1;
 	}
 	
-	private void validateIndex(int idx) {
-		if (!(idx > 0 && idx <= this.N)) {
+	private boolean internalIndexValid(int internalIdx) {
+		return internalIdx >= 0 && internalIdx < this.N;
+	}
+	
+	private boolean indexValid(int idx) {
+		return idx > 0 && idx <= this.N;
+	}
+	
+	private boolean internalIndicesValid(int row, int col) {
+		return this.internalIndexValid(row) &&
+		       this.internalIndexValid(col);
+	}
+	
+	private void validateInternalIndex(int internalIdx) {
+		if (!this.internalIndexValid(internalIdx)) {
 			throw new IllegalArgumentException(
-					"Index " + idx + " is out of range."
+					"Internal index " + internalIdx + " is out of range."
 			);
 		}			
 	}
+	
+	private void validateInternalIndices(int row, int col) {
+		this.validateInternalIndex(row);
+		this.validateInternalIndex(col);
+	}
 
-	private void validateInternalIndex(int internalIdx) {
-		if (!(internalIdx >= 0 && internalIdx < this.N)) {
+	private void validateIndex(int idx) {
+		if (!this.indexValid(idx)) {
 			throw new IllegalArgumentException(
-					"Internal index " + internalIdx + " is out of range."
+					"Index " + idx + " is out of range."
 			);
 		}			
 	}
@@ -131,12 +172,7 @@ public class Percolation {
 		this.validateIndex(row);
 		this.validateIndex(col);
 	}
-
-	private void validateInternalIndices(int row, int col) {
-		this.validateInternalIndex(row);
-		this.validateInternalIndex(col);
-	}
-	
+		
 	/**
 	 * Open site (row, col) if it is not open already.
 	 * @param row The row of the site to be opened (>= 1).
