@@ -111,20 +111,24 @@ public class Percolation {
 		
 		final Site[] adj = new Site[4];
 		
-		if (internalIndicesValid(row-1, col-1)) {
-			adj[0] = grid[row-1][col-1];
+		// NORTH
+		if (internalIndicesValid(row-1, col)) {
+			adj[0] = grid[row-1][col];
 		}
 		
-		if (internalIndicesValid(row, col-1)) {
-			adj[1] = grid[row][col-1];
-		}
-		
+		// SOUTH
 		if (internalIndicesValid(row+1, col)) {
-			adj[0] = grid[row+1][col];
+			adj[1] = grid[row+1][col];
+		}
+		
+		// WEST
+		if (internalIndicesValid(row, col-1)) {
+			adj[2] = grid[row][col-1];
 		}
 
-		if (internalIndicesValid(row+1, col+1)) {
-			adj[0] = grid[row+1][col+1];
+		// EAST
+		if (internalIndicesValid(row, col+1)) {
+			adj[3] = grid[row][col+1];
 		}
 
 		return adj;
@@ -132,6 +136,10 @@ public class Percolation {
 	
 	private void fillAdjacentSites(int row, int col) {
 		for (Site adj : this.adjacentSites(row, col)) {
+			if (adj == null) {
+				return;
+			}
+			
 			if (adj.isFull()) {
 				// Adjacent is already FULL, skip.
 				continue;
@@ -200,7 +208,7 @@ public class Percolation {
 		// have connected it to the top/bottom virtual
 		// Sites in uf1 and uf2 as required.)
 		for (Site adj : adjs) {
-			if (adj.isOpen()) {
+			if (adj != null && adj.isOpen()) {
 				uf1.union(s.index(), adj.index());
 				uf2.union(s.index(), adj.index());
 			}
@@ -216,7 +224,7 @@ public class Percolation {
 		// recursively fill any open, unfilled
 		// adjacent Site.
 		for (Site adj : adjs) {
-			if (adj.isOpen() && !adj.isFull()) {
+			if (adj != null && adj.isOpen() && !adj.isFull()) {
 				this.fillAdjacentSites(adj.rowIdx, adj.colIdx);
 			}
 		}
