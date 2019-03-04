@@ -189,7 +189,7 @@ public class Percolation {
 	 */
 	public void open(int row, int col) {
 		this.validateIndices(row, col);
-	
+		
 		// Retrieve internal indices of target Site.
 		final int internalRow = this.idxToInternalIdx(row);
 		final int internalCol = this.idxToInternalIdx(col);
@@ -197,8 +197,14 @@ public class Percolation {
 		// Retrieve target Site, s.
 		final Site s = this.grid[internalRow][internalCol];
 		
+		if (s.isOpen()) {
+			// Site already open, do nothing.
+			return;
+		}
+		
 		// Update status of s to OPEN.
 		s.status = SiteStatus.OPEN;
+		++this.numOpenSites;
 
 		// Obtain s's adjacent Sites.
 		final Site[] adjs = this.adjacentSites(s.rowIdx, s.colIdx);
@@ -220,17 +226,18 @@ public class Percolation {
 			s.status = SiteStatus.FULL;
 		}
 		
-		// Iterate through s's adjacent Sites and
-		// recursively fill any open, unfilled
-		// adjacent Site.
+		// Iterate through s's adjacent Sites, fill
+		// any that are open and unfilled, and then
+		// recursively do the same for their adjacent
+		// Sites.
 		for (Site adj : adjs) {
 			if (adj != null && adj.isOpen() && !adj.isFull()) {
+				adj.status = SiteStatus.FULL;
+				
+				// Recursively process adjacent Sites of adj.
 				this.fillAdjacentSites(adj.rowIdx, adj.colIdx);
 			}
 		}
-		
-		// Increment number of open Sites.
-		++this.numOpenSites;
 	}
 	
 	/**
@@ -272,4 +279,31 @@ public class Percolation {
 				            , BOTTOM_VIRTUAL_SITE_INTERNAL_INDEX
 				            );
 	}
+	
+	/*
+	@Override
+	public String toString() {
+		StringBuffer s = new StringBuffer();
+		for (int row = 0; row < this.N; ++row) {
+			for (int col = 0; col < this.N; ++col) {
+				switch (this.grid[row][col].status) {
+				case BLOCKED:
+					s.append("B");
+					break;
+				case OPEN:
+					s.append("O");					
+					break;
+				case FULL:
+					s.append("F");					
+					break;
+				default:
+					throw new IllegalStateException("Unknown SiteStatus for row: " + row + ", col: " + col);
+				}
+				s.append(" ");
+			}
+			s.append("\n");
+		}
+		return s.toString();
+	}
+	*/
 }

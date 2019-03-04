@@ -114,7 +114,7 @@ class PercolationTest {
 		p.open(4, 4);
 		assertFalse(p.percolates());		
 		p.open(5, 5);
-		assertTrue(p.percolates());		
+		assertFalse(p.percolates());		
 	}
 	
 	@Test
@@ -129,7 +129,7 @@ class PercolationTest {
 		p.open(4, 2);
 		assertFalse(p.percolates());		
 		p.open(5, 1);
-		assertTrue(p.percolates());		
+		assertFalse(p.percolates());		
 	}
 
 	@Test
@@ -184,6 +184,8 @@ class PercolationTest {
 		assertFalse(p.isFull(3, 2));
 		assertFalse(p.isFull(3, 3));
 
+		assertEquals(p.numberOfOpenSites(), 0);
+		
 		p.open(1, 1);
 
 		assertTrue(p.isFull(1, 1));
@@ -264,7 +266,7 @@ class PercolationTest {
 		assertTrue(p.isFull(2, 1));
 		assertFalse(p.isFull(2, 2));
 		assertTrue(p.isFull(2, 3));
-		assertFalse(p.isFull(3, 1));
+		assertTrue(p.isFull(3, 1));
 		assertFalse(p.isFull(3, 2));
 		assertTrue(p.isFull(3, 3));
 
@@ -276,7 +278,7 @@ class PercolationTest {
 		assertTrue(p.isFull(2, 1));
 		assertTrue(p.isFull(2, 2));
 		assertTrue(p.isFull(2, 3));
-		assertFalse(p.isFull(3, 1));
+		assertTrue(p.isFull(3, 1));
 		assertFalse(p.isFull(3, 2));
 		assertTrue(p.isFull(3, 3));
 		
@@ -318,7 +320,7 @@ class PercolationTest {
 		p.open(1, 1);
 		assertFalse(p.percolates());
 		p.open(2, 2);
-		assertTrue(p.percolates());		
+		assertFalse(p.percolates());		
 	}
 
 	@Test
@@ -345,7 +347,7 @@ class PercolationTest {
 		p.open(2, 1);
 		assertFalse(p.percolates());
 		p.open(2, 2);
-		assertTrue(p.percolates());		
+		assertFalse(p.percolates());		
 	}
 
 	@Test
