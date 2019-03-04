@@ -89,7 +89,7 @@ public class Percolation {
 		}
 		
 		boolean isOpen() {
-			return this.status == SiteStatus.OPEN;
+			return !this.isBlocked();
 		}
 
 		boolean isFull() {
