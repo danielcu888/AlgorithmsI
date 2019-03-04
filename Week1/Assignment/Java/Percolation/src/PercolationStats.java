@@ -1,3 +1,7 @@
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+
 /**
  * A class to perform independent trial percolation
  * experiments on an n-by-n grid, and provide the
@@ -5,6 +9,9 @@
  *
  */
 public class PercolationStats {
+	
+	private double[] threshold;
+	
 	/** 
 	 * Perform a specified number of independent trial
 	 * experiments on an n-by-n grid.
@@ -12,11 +19,35 @@ public class PercolationStats {
 	 * @param trials The specified number of trials.
 	 */
 	public PercolationStats(int n, int trials) {
-		// TODO - implement.
-		throw new UnsupportedOperationException(
-				"PercolationStats.PercolationStats(int,int)"
-				+ "is unimplemented."
-		);
+		if (n < 1) {
+			throw new IllegalArgumentException(
+					"Grid dimension " + n + " must be > 0."
+			);
+		}
+		
+		if (trials < 1) {
+			throw new IllegalArgumentException(
+					"Number of trials " + trials + " must be > 0."
+			);			
+		}
+		
+		this.threshold = new double[trials];
+		
+		Percolation p;
+		for (int trial = 0; trial < trials; ++trial) {
+			
+			p = new Percolation(n);
+			
+			while (!p.percolates()) {
+				
+				final int row = StdRandom.uniform(n);
+				final int col = StdRandom.uniform(n);
+				
+				p.open(row+1, col+1);
+			}
+			
+			this.threshold[trial] = (double)p.numberOfOpenSites()/(double)(n*n);
+		}
 	}
 	
 	/**
@@ -24,10 +55,7 @@ public class PercolationStats {
 	 * @return The sample mean of the percolation threshold.
 	 */
 	public double mean() {
-		// TODO - implement.
-		throw new UnsupportedOperationException(
-				"PercolationStats.mean() is unimplemented."
-		);		
+		return StdStats.mean(this.threshold);
 	}
 	
 	/**
@@ -37,10 +65,7 @@ public class PercolationStats {
 	 *         threshold.
 	 */
 	public double stddev() {
-		// TODO - implement.
-		throw new UnsupportedOperationException(
-				"PercolationStats.stddev() is unimplemented."
-		);		
+		return StdStats.stddev(this.threshold);
 	}
 	
 	/**
@@ -48,10 +73,7 @@ public class PercolationStats {
 	 * @return The lower bound of the 95% confidence interval.
 	 */
 	public double confidenceLo() {
-		// TODO - implement.
-		throw new UnsupportedOperationException(
-				"PercolationStats.confidenceLo() is unimplemented."
-		);				
+		return this.mean() - 1.96/Math.sqrt(this.threshold.length);
 	}
 
 	/**
@@ -59,9 +81,33 @@ public class PercolationStats {
 	 * @return The upper bound of the 95% confidence interval.
 	 */	
 	public double confidenceHi() {
-		// TODO - implement.
-		throw new UnsupportedOperationException(
-				"PercolationStats.confidenceHi() is unimplemented."
-		);		
+		return this.mean() + 1.96/Math.sqrt(this.threshold.length);
 	}
+	
+    /** Takes two command-line arguments n and T,                            
+     * performs T independent computational experiment                      
+     * on an n-by-n grid, and prints the sample mean,                                              
+     * sample standard deviation, and the 95% confidence                    
+     * interval for the percolation threshold.
+     */
+    public static void main(String[] args) {
+		
+		if (args.length != 2) {
+			throw new IllegalArgumentException(
+					"Usage: <Grid dim> <#trials>"
+			);
+		}
+		
+		final int n = Integer.valueOf(args[0]);
+		final int trials = Integer.valueOf(args[1]);
+		
+		final PercolationStats stats = new PercolationStats(n, trials);
+		
+		StdOut.println("mean                    = " + stats.mean());
+		StdOut.println("stddev                  = " + stats.stddev());
+		StdOut.println( "95% confidence interval = ["
+		              + stats.confidenceLo() + ", "
+				      + stats.confidenceHi() + "]"
+				      );
+    }
 }
