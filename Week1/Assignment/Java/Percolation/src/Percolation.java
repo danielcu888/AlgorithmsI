@@ -15,8 +15,8 @@ public class Percolation {
 	private int numOpenSites;
 	private final WeightedQuickUnionUF uf1;
 	private final WeightedQuickUnionUF uf2;
-	final int TOP_VIRTUAL_SITE_INTERNAL_INDEX = 0;
-	final int BOTTOM_VIRTUAL_SITE_INTERNAL_INDEX;
+	private final int TOP_VIRTUAL_SITE_INTERNAL_INDEX = 0;
+	private final int BOTTOM_VIRTUAL_SITE_INTERNAL_INDEX;
 	
 	/**
 	 * Create an n-by-n grid, with all sites blocked.
