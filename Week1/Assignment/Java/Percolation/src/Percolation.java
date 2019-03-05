@@ -9,13 +9,14 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * specified sites constituting it.
  */
 public class Percolation {
-    
+
+    private static final int TOP_VIRTUAL_SITE_INTERNAL_INDEX = 0;
+
     private final int n;
     private final Site[][] grid;
     private int numOpenSites;
     private final WeightedQuickUnionUF uf1;
     private final WeightedQuickUnionUF uf2;
-    private static final int topVirtualSiteInternalIndex = 0;
     private final int bottomVirtualSiteInternalIndex;
     
     /**
@@ -62,13 +63,13 @@ public class Percolation {
         // It is required to determine if the system is percolating.
         this.uf2 = new WeightedQuickUnionUF(this.n*this.n + 2);
         for (int colIdx = 0; colIdx < this.n; ++colIdx) {
-            this.uf2.union(topVirtualSiteInternalIndex
-                          ,this.grid[0][colIdx].index()
+            this.uf2.union(TOP_VIRTUAL_SITE_INTERNAL_INDEX,
+                           this.grid[0][colIdx].index()
                           );
         }
         for (int colIdx = 0; colIdx < this.n; ++colIdx) {
-            this.uf2.union(bottomVirtualSiteInternalIndex
-                          ,this.grid[this.n-1][colIdx].index()
+            this.uf2.union(bottomVirtualSiteInternalIndex,
+                           this.grid[this.n-1][colIdx].index()
                           );
         }
     }
@@ -222,7 +223,7 @@ public class Percolation {
         
         // Determine if s should be filled by checking
         // if it is connected with the top virtual Site.
-        if (uf1.connected(topVirtualSiteInternalIndex, s.index())) {
+        if (uf1.connected(TOP_VIRTUAL_SITE_INTERNAL_INDEX, s.index())) {
             s.status = SiteStatus.FULL;
         }
         
@@ -275,8 +276,8 @@ public class Percolation {
      * @return If the system percolates.
      */
     public boolean percolates() {
-        return uf2.connected(topVirtualSiteInternalIndex
-                            ,bottomVirtualSiteInternalIndex
+        return uf2.connected(TOP_VIRTUAL_SITE_INTERNAL_INDEX,
+                             bottomVirtualSiteInternalIndex
                             );
     }
     

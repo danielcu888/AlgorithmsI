@@ -9,9 +9,10 @@ import edu.princeton.cs.algs4.StdStats;
  *
  */
 public class PercolationStats {
-    
+
+    private static final double CONFIDENCE_95 = 1.96;
+
     private final double[] threshold;
-    private static final double confidenceNinetyFive = 1.96;
     
     /** 
      * Perform a specified number of independent trial
@@ -74,7 +75,7 @@ public class PercolationStats {
      * @return The lower bound of the 95% confidence interval.
      */
     public double confidenceLo() {
-        return this.mean() - confidenceNinetyFive/Math.sqrt(this.threshold.length);
+        return this.mean() - CONFIDENCE_95/Math.sqrt(this.threshold.length);
     }
 
     /**
@@ -82,7 +83,7 @@ public class PercolationStats {
      * @return The upper bound of the 95% confidence interval.
      */    
     public double confidenceHi() {
-        return this.mean() + confidenceNinetyFive/Math.sqrt(this.threshold.length);
+        return this.mean() + CONFIDENCE_95/Math.sqrt(this.threshold.length);
     }
     
     /** Takes two command-line arguments n and T,                            
