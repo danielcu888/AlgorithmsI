@@ -1,1 +1,5 @@
-/bin/
+bin
+test
+src/InteractivePercolationVisualizer.java
+src/PercolationVisualizer.java
+src/percolation-submit.zip
