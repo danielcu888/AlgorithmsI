@@ -138,7 +138,7 @@ public class Percolation {
     private void fillAdjacentSites(int row, int col) {
         for (Site adj : this.adjacentSites(row, col)) {
             if (adj == null) {
-                return;
+                continue;
             }
             
             if (adj.isFull()) {
@@ -225,20 +225,20 @@ public class Percolation {
         // if it is connected with the top virtual Site.
         if (uf1.connected(TOP_VIRTUAL_SITE_INTERNAL_INDEX, s.index())) {
             s.status = SiteStatus.FULL;
-        }
-        
-        // Iterate through s's adjacent Sites, fill
-        // any that are open and unfilled, and then
-        // recursively do the same for their adjacent
-        // Sites.
-        for (Site adj : adjs) {
-            if (adj != null && adj.isOpen() && !adj.isFull()) {
-                adj.status = SiteStatus.FULL;
-                
-                // Recursively process adjacent Sites of adj.
-                this.fillAdjacentSites(adj.rowIdx, adj.colIdx);
+            
+            // Iterate through s's adjacent Sites, fill
+            // any that are open and unfilled, and then
+            // recursively do the same for their adjacent
+            // Sites.        	
+            for (Site adj : adjs) {
+                if (adj != null && adj.isOpen() && !adj.isFull()) {
+                    adj.status = SiteStatus.FULL;
+                    
+                    // Recursively process adjacent Sites of adj.
+                    this.fillAdjacentSites(adj.rowIdx, adj.colIdx);
+                }
             }
-        }
+        }        
     }
     
     /**
@@ -281,7 +281,7 @@ public class Percolation {
                             );
     }
     
-    /*
+    
     @Override
     public String toString() {
         StringBuffer s = new StringBuffer();
@@ -306,5 +306,5 @@ public class Percolation {
         }
         return s.toString();
     }
-    */
+    
 }
