@@ -1,71 +1,88 @@
 import java.util.Arrays;
+import java.util.HashSet;
+
+class Triplet {
+	private final int a;
+	private final int b;
+	private final int c;
+	private final String key;
+	
+	Triplet(int a_, int b_, int c_) {
+		this.a = a_;
+		this.b = b_;
+		this.c = c_;
+		this.key = Integer.toString(this.a) + " " +
+			       Integer.toString(this.b) + " " +
+			       Integer.toString(this.c);
+	}
+	
+	@Override
+	public String toString() {
+		return this.key;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Triplet) {
+			return this.key.compareTo(((Triplet)other).key) == 0;
+		}
+
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.key.hashCode();
+	}
+}
 
 public class ThreeSumInQuadraticTime {
 
-	static class Triplet {
-		Triplet(int a, int b, int c) {
-			this.a = a;
-			this.b = b;
-			this.c = c;
-		}
-		
-		int a;
-		int b;
-		int c;
-	}
+	private final int N;
+	private final int[] a;
+	private final HashSet<Triplet> triplets;
 	
-	public static Triplet ThreeSum(int[] arr) {
+	public ThreeSumInQuadraticTime(int[] a_) {
 		
-		final int N = arr.length;
+		this.a = a_;
+		this.N = a.length;
+		this.triplets = new HashSet<Triplet>();
 		
-		// Sort input array.
-		Arrays.sort(arr);
+		Arrays.sort(this.a);
 		
-		// Loop over target sum's (negated) until we find a triplet zero-sum.
-		
-		// Initialize.
-		int sum = Integer.MAX_VALUE; // Arbitrary, just needs to be non-zero.
-		int a = 0; // Arbitrary
-		int b = 0; // Arbitrary
-		int c = 0; // Arbitrary
-		for (int i = 0; i < N-2 && sum != 0; ++i) {
-		
-			// Set candidate solution.
-			a = i;
-			b = i+1;
-			c = N-1;
+		for (int i = 0; i < this.N; ++i) {
 			
-			while (b < c) {				
-				sum = arr[a] + arr[b] + arr[c];
-				if (sum == 0) {
-					// Found solution.
-					break;
+			int leftIdx = 0;
+			int rightIdx = N-1;
+			
+			while (leftIdx < rightIdx) {
+				if (leftIdx == i) {
+					++leftIdx;
+				} else if (rightIdx == i) {
+					--rightIdx;
 				}
 				
-				if (sum < 0) {
-					// sum too low, increment b.
-					++b;
+				final int sum = this.a[leftIdx] + this.a[rightIdx] + this.a[i];
+				if (sum > 0) {
+					--rightIdx;
+				} else if (sum < 0) {
+					++leftIdx;
 				} else {
-					// sum too high, decrement c.
-					--c;
+					final int[] tripletElements
+						= {this.a[i], this.a[leftIdx], this.a[rightIdx]};
+					Arrays.sort(tripletElements);					
+					this.triplets.add(new Triplet( tripletElements[0]
+		                                         , tripletElements[1]
+		                                         , tripletElements[2]
+		                                         )
+							         );					
+					--rightIdx;
 				}
-			}			
-		}
-		
-		return sum == 0 ? new Triplet(a, b, c) : null;
-	}
-
-	public static void main(String[] args) {
-		
-		final int[] arr = {-20, -17, -15, -12, -4, 0, 1, 2, 32};
-		final Triplet t = ThreeSumInQuadraticTime.ThreeSum(arr);
-		if (t == null) {
-			System.out.println("No solution.");
-		} else {
-			System.out.println("a: " + t.a + ", b: " + t.b + ", t.c: " + t.c);
+			}
 		}
 	}
 	
-	
-	
+	public Iterable<Triplet> triplets() {
+		return this.triplets;
+	}
 }
