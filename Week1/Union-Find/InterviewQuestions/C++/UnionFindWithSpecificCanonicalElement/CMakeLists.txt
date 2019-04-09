@@ -93,13 +93,11 @@ target_link_libraries( UnionFindWithSpecificCanonicalElementTests
 
 set (RUN_UNIT_TESTS TRUE CACHE BOOL "Run the unit tests.")
 
-set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
-
 if (RUN_UNIT_TESTS)
   add_custom_command(
       TARGET UnionFindWithSpecificCanonicalElementTests
       COMMENT "Running Unit Tests..."
       POST_BUILD
-      COMMAND ./UnionFindWithSpecificCanonicalElementTests "${TEST_RESOURCES_DIR}"
+      COMMAND ./UnionFindWithSpecificCanonicalElementTests
   )
 endif()

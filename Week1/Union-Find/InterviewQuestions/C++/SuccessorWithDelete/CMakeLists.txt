@@ -93,13 +93,11 @@ target_link_libraries( SuccessorWithDeleteTests
 
 set (RUN_UNIT_TESTS TRUE)
 
-set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
-
 if (${RUN_UNIT_TESTS})
   add_custom_command(
       TARGET SuccessorWithDeleteTests
       COMMENT "Running Unit Tests..."
       POST_BUILD
-      COMMAND ./SuccessorWithDeleteTests "${TEST_RESOURCES_DIR}"
+      COMMAND ./SuccessorWithDeleteTests
   )
 endif()
