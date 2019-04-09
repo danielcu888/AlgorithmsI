@@ -9,7 +9,7 @@ class SocialNetworkConnectivityTest {
 
 	@Test
 	void test() throws FileNotFoundException {
-		final File logFile = new File("test/logFile");
+		final File logFile = new File("resources/logFile");
 		final SocialNetworkConnectivity snc = new SocialNetworkConnectivity(logFile);
 		assertEquals(snc.getConnectionTime(), "20-01-1970");
 	}
