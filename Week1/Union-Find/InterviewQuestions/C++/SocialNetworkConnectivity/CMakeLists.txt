@@ -130,7 +130,7 @@ target_link_libraries( SocialConnectivityTests
 # RUN TESTS
 # ------------------------------------------------------------------------------
 
-set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
+set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/resources")
 
 add_custom_command(
     TARGET SocialConnectivityTests

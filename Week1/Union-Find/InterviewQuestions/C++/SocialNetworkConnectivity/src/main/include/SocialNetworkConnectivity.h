@@ -19,7 +19,7 @@ namespace sn
 {
   class SocialNetworkConnectivity final
   {
-  public:
+   public:
     SocialNetworkConnectivity( std::size_t N
 			     , const boost::filesystem::path& logFile
 			     );
@@ -31,7 +31,7 @@ namespace sn
 
     boost::optional<boost::posix_time::ptime> FullyConnectedTime() const;
 
-  private:
+   private:
 
     static void report(const std::string& s);
 
