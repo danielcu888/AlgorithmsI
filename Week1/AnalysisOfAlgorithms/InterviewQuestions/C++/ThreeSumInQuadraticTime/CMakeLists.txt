@@ -130,13 +130,11 @@ target_link_libraries( ThreeSumInQuadraticTimeTests
 # RUN TESTS
 # ------------------------------------------------------------------------------
 
-set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
-
 if (TRUE)
   add_custom_command(
       TARGET ThreeSumInQuadraticTimeTests
       COMMENT "Running Unit Tests..."
       POST_BUILD
-      COMMAND ./ThreeSumInQuadraticTimeTests "${TEST_RESOURCES_DIR}"
+      COMMAND ./ThreeSumInQuadraticTimeTests
   )
 endif()

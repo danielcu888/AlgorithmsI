@@ -130,13 +130,11 @@ target_link_libraries( SearchInBionicArrayTests
 # RUN TESTS
 # ------------------------------------------------------------------------------
 
-set(TEST_RESOURCES_DIR "${PROJECT_SOURCE_DIR}/src/test/resources")
-
 if (TRUE)
   add_custom_command(
       TARGET SearchInBionicArrayTests
       COMMENT "Running Unit Tests..."
       POST_BUILD
-      COMMAND ./SearchInBionicArrayTests "${TEST_RESOURCES_DIR}"
+      COMMAND ./SearchInBionicArrayTests
   )
 endif()
