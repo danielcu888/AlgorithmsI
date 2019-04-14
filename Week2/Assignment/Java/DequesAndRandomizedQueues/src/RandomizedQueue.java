@@ -3,10 +3,10 @@ import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
-public class RandomizedQueue<T> implements Iterable<T> {
+public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private int capacity;
-	private T[] a;
+	private Item[] a;
 	private int head; // Points to the first element.
 	private int tail; // Points to the next element to be filled.
 	private int sz;
@@ -16,7 +16,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 	 */
 	public RandomizedQueue() {
 		this.capacity = 1;
-		this.a = (T[]) new Object[this.capacity];
+		this.a = (Item[]) new Object[this.capacity];
 		this.head = 0;
 		this.tail = 0;
 		this.sz = 0;
@@ -39,7 +39,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 	}
 	
 	private void resize(int newCapacity) {
-		final T[] newA = (T[]) new Object[newCapacity];
+		final Item[] newA = (Item[]) new Object[newCapacity];
 		for (int i = this.head, j = 0; i < this.tail; ++i, ++j) {
 			newA[j] = this.a[i];
 		}
@@ -54,7 +54,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 	 * @param t The Object to be added.
 	 * @throws 
 	 */
-	public void enqueue(T t) {
+	public void enqueue(Item t) {
 		if (t == null) {
 			throw new IllegalArgumentException("enqueue() - null argument.");
 		}
@@ -71,7 +71,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 	 * @brief Return the Object from the front of this RandomizedQueue.
 	 * @return The Object from the front of this RandomizedQueue.
 	 */
-	public T dequeue() {
+	public Item dequeue() {
 		if (this.isEmpty()) {
 			throw new NoSuchElementException("dequeue() - Empty RandomizedQueue.");
 		}
@@ -81,7 +81,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 		}
 		
 		final int ridx = this.head + StdRandom.uniform(this.sz);
-		final T ret = this.a[ridx];
+		final Item ret = this.a[ridx];
 		
 		this.a[ridx] = this.a[this.tail-1];
 		this.a[--this.tail] = null;
@@ -90,7 +90,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 		return ret;
 	}
 	
-	public T sample() {
+	public Item sample() {
 		if (this.isEmpty()) {
 			throw new NoSuchElementException("sample() - Empty RandomizedQueue.");
 		}
@@ -98,13 +98,13 @@ public class RandomizedQueue<T> implements Iterable<T> {
 		return this.a[this.head + StdRandom.uniform(this.sz)];
 	}
 	
-	private class RandomizedDequeIterator implements Iterator<T> {
+	private class RandomizedDequeIterator implements Iterator<Item> {
 
-		T[] b;
+		Item[] b;
 		int bSize;
 		
 		public RandomizedDequeIterator() {
-			this.b = (T[]) new Object[sz];
+			this.b = (Item[]) new Object[sz];
 			for (int i = head, j = 0; i < tail; ++i, ++j) {
 				this.b[j] = a[i];
 			}
@@ -117,13 +117,13 @@ public class RandomizedQueue<T> implements Iterable<T> {
 		}
 
 		@Override
-		public T next() {
+		public Item next() {
 			if (!this.hasNext()) {
 				throw new NoSuchElementException("next() - No more elements.");
 			}
 			
 			final int ridx = StdRandom.uniform(this.bSize);
-			final T ret = this.b[ridx];
+			final Item ret = this.b[ridx];
 			this.b[ridx] = this.b[this.bSize-1];
 			this.b[this.bSize-1] = null;
 			--this.bSize;
@@ -133,7 +133,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 	}
 	
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<Item> iterator() {
 		return new RandomizedDequeIterator();
 	}
 }

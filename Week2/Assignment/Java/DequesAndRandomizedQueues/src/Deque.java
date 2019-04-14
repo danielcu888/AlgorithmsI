@@ -1,14 +1,14 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque<T> implements Iterable<T> {
+public class Deque<Item> implements Iterable<Item> {
 
 	private class Node {
-		T val;
+		Item val;
 		Node prev;
 		Node next;
 		
-		Node(T val_, Node prev_, Node next_) {
+		Node(Item val_, Node prev_, Node next_) {
 			this.val = val_;
 			this.prev = prev_;
 			this.next = next_;
@@ -49,7 +49,7 @@ public class Deque<T> implements Iterable<T> {
 	 * @param t The specified Object to be added.
 	 * @throws IllegalArgumentException if one attempts to add null.
 	 */
-	public void addFirst(T t) {
+	public void addFirst(Item t) {
 		if (t == null) {
 			throw new IllegalArgumentException("addFirst() - null argument.");
 		} else if (this.isEmpty()) {
@@ -70,7 +70,7 @@ public class Deque<T> implements Iterable<T> {
 	 * @param t The specified Object to be added.
 	 * @throws IllegalArgumentException if one attempts to add null.
 	 */
-	public void addLast(T t) {
+	public void addLast(Item t) {
 		if (t == null) {
 			throw new IllegalArgumentException("addLast() - null argument.");
 		} else if (this.isEmpty()) {
@@ -92,12 +92,12 @@ public class Deque<T> implements Iterable<T> {
 	 * @return The Object at the front of this Deque.
 	 * @throws NoSuchElementException If this Deque is empty.
 	 */
-	public T removeFirst() {
+	public Item removeFirst() {
 		if (this.isEmpty()) {
 			throw new NoSuchElementException("removeFirst() - empty Deque.");
 		}
 		
-		final T retVal = this.head.val;
+		final Item retVal = this.head.val;
 
 		if (this.head == this.tail) {
 			this.head = this.tail = null;
@@ -116,12 +116,12 @@ public class Deque<T> implements Iterable<T> {
 	 * @return The Object at the back of this Deque.
 	 * @throws NoSuchElementException If this Deque is empty.
 	 */
-	public T removeLast() {
+	public Item removeLast() {
 		if (this.isEmpty()) {
 			throw new NoSuchElementException("Cannot removeLast() from an empty Deque.");
 		}
 		
-		final T ret = this.tail.val;
+		final Item ret = this.tail.val;
 		
 		if (this.head == this.tail) {
 			this.head = this.tail = null;
@@ -135,7 +135,7 @@ public class Deque<T> implements Iterable<T> {
 		return ret;
 	}
 	
-	private class DequeIterator implements Iterator<T> {
+	private class DequeIterator implements Iterator<Item> {
 		Node n;
 		
 		DequeIterator() {
@@ -148,11 +148,11 @@ public class Deque<T> implements Iterable<T> {
 		}
 
 		@Override
-		public T next() {
+		public Item next() {
 			if (!this.hasNext()) {
 				throw new NoSuchElementException("next() - No more elements.");
 			}
-			final T ret = this.n.val;
+			final Item ret = this.n.val;
 			this.n = this.n.next;
 			return ret;
 		}
@@ -168,7 +168,7 @@ public class Deque<T> implements Iterable<T> {
 	 * @return An iterator over the Objects in this Deque
 	 *    in order from front to end.
 	 */
-	public Iterator<T> iterator() {
+	public Iterator<Item> iterator() {
 		return new DequeIterator();
 	}
 }
