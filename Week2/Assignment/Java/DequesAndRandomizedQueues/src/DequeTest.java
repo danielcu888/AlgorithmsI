@@ -61,7 +61,7 @@ class DequeTest {
     		final Iterator<Integer> iter = d.iterator();
     		iter.next();
 		} catch (NoSuchElementException exc) {
-			assertEquals(exc.getMessage(), "next: No more Item's.");
+			assertEquals(exc.getMessage(), "next() - No more elements.");
 		} catch (Exception exc) {
 			throw exc;
 		}
